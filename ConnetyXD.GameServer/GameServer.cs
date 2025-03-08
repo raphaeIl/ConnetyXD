@@ -13,10 +13,6 @@ namespace ConnetyXD.GameServer
     {
         public static void Main(string[] args)
         {
-            var packet = (AccessAns)PcapUtils.GetPacketFromPcap(Protocol.AccessAns).Packet;
-
-            Console.WriteLine(System.Text.Json.JsonSerializer.Serialize(packet, SnakeCaseNamingPolicy.SnakeCaseOptions));
-
             Log.Information("Starting GameServer...");
             try
             {

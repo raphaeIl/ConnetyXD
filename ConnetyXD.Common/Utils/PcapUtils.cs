@@ -24,8 +24,16 @@ namespace ConnetyXD.Common.Utils
             this.LoadPcapFromFile(Path.Combine(AppContext.BaseDirectory, "Resources", pcapFileName));
         }
 
+
+        public static T GetPacketFromPcap<T>() where T : IExtensible
+        {
+            Protocol protocol = (Protocol)Enum.Parse(typeof(Protocol), typeof(T).Name);
+
+            return (T)GetPacketFromPcap(protocol).Packet;
+        }
+
         // get the first packet of protocol
-        public static OZPacket GetPacketFromPcap(Protocol protocol)
+        private static OZPacket GetPacketFromPcap(Protocol protocol)
         {
             if (PcapUtils.Instance.Packets.Count == 0)
             {
@@ -33,13 +41,6 @@ namespace ConnetyXD.Common.Utils
             }
 
             return PcapUtils.Instance.Packets.Where(p => p.Protocol == protocol).FirstOrDefault();
-        }
-
-        public static OZPacket GetPacketFromPcap<T>() where T : IExtensible
-        {
-            Protocol protocol = (Protocol)Enum.Parse(typeof(Protocol), typeof(T).Name);
-
-            return GetPacketFromPcap(protocol);
         }
 
         private void LoadPcapFromFile(string pcapPath)
