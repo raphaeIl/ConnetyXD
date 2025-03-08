@@ -16,22 +16,41 @@ namespace Oz
         global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1, Name = @"food")]
+        [global::ProtoBuf.ProtoMember(1, Name = @"id")]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string Id { get; set; } = "";
+
+        [global::ProtoBuf.ProtoMember(2, Name = @"exp")]
+        public long Exp { get; set; }
+
+        [global::ProtoBuf.ProtoMember(3, Name = @"food")]
         public OZCharFood Food { get; set; }
 
-        [global::ProtoBuf.ProtoMember(2, Name = @"skills")]
+        [global::ProtoBuf.ProtoMember(4, Name = @"level")]
+        public int Level { get; set; }
+
+        [global::ProtoBuf.ProtoMember(5, Name = @"grade")]
+        public int Grade { get; set; }
+
+        [global::ProtoBuf.ProtoMember(6, Name = @"skills")]
         [global::ProtoBuf.ProtoMap]
         public global::System.Collections.Generic.Dictionary<string, int> Skills { get; set; } = new global::System.Collections.Generic.Dictionary<string, int>();
 
-        [global::ProtoBuf.ProtoMember(3, Name = @"equips")]
+        [global::ProtoBuf.ProtoMember(7, Name = @"equips")]
         [global::ProtoBuf.ProtoMap]
         public global::System.Collections.Generic.Dictionary<string, OZCharEquip> Equips { get; set; } = new global::System.Collections.Generic.Dictionary<string, OZCharEquip>();
 
-        [global::ProtoBuf.ProtoMember(4, Name = @"create_at")]
-        public long CreateAt { get; set; }
+        [global::ProtoBuf.ProtoMember(8, Name = @"favorite")]
+        public bool Favorite { get; set; }
 
-        [global::ProtoBuf.ProtoMember(5, Name = @"id")]
-        public string Id { get; set; }
+        [global::ProtoBuf.ProtoMember(9, Name = @"friendship_exp")]
+        public int FriendshipExp { get; set; }
+
+        [global::ProtoBuf.ProtoMember(10, Name = @"friendship_level")]
+        public int FriendshipLevel { get; set; }
+
+        [global::ProtoBuf.ProtoMember(11, Name = @"create_at")]
+        public long CreateAt { get; set; }
 
     }
 

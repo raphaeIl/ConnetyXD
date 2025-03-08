@@ -17,10 +17,12 @@ namespace Oz
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
         [global::ProtoBuf.ProtoMember(1, Name = @"id")]
-        public string Id { get; set; }
+        [global::System.ComponentModel.DefaultValue("")]
+        public string Id { get; set; } = "";
 
         [global::ProtoBuf.ProtoMember(2, Name = @"count")]
         public long Count { get; set; }
+
     }
 
 }

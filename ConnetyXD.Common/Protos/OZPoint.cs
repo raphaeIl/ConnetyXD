@@ -16,23 +16,25 @@ namespace Oz
         global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-        [global::ProtoBuf.ProtoMember(1, Name = @"charge_num")]
+        [global::ProtoBuf.ProtoMember(1, Name = @"id")]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string Id { get; set; } = "";
+
+        [global::ProtoBuf.ProtoMember(2, Name = @"count")]
+        public long Count { get; set; }
+
+        [global::ProtoBuf.ProtoMember(3, Name = @"charge_num")]
         public int ChargeNum { get; set; }
 
-        [global::ProtoBuf.ProtoMember(2, Name = @"charge_time")]
+        [global::ProtoBuf.ProtoMember(4, Name = @"charge_time")]
         public long ChargeTime { get; set; }
 
-        [global::ProtoBuf.ProtoMember(3, Name = @"action_time")]
+        [global::ProtoBuf.ProtoMember(5, Name = @"action_time")]
         public long ActionTime { get; set; }
 
-        [global::ProtoBuf.ProtoMember(4, Name = @"expire_time")]
+        [global::ProtoBuf.ProtoMember(6, Name = @"expire_time")]
         public long ExpireTime { get; set; }
 
-        [global::ProtoBuf.ProtoMember(5, Name = @"id")]
-        public string Id { get; set; }
-
-        [global::ProtoBuf.ProtoMember(5, Name = @"count")]
-        public long Count { get; set; }
     }
 
 }

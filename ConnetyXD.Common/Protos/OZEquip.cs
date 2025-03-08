@@ -16,6 +16,13 @@ namespace Oz
         global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
             => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
+        [global::ProtoBuf.ProtoMember(1, Name = @"id")]
+        [global::System.ComponentModel.DefaultValue("")]
+        public string Id { get; set; } = "";
+
+        [global::ProtoBuf.ProtoMember(2, Name = @"count")]
+        public long Count { get; set; }
+
     }
 
 }
