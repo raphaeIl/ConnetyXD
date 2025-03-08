@@ -7,8 +7,8 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using Microsoft.Extensions.Options;
-using Google.Protobuf;
 using System.Text;
+using ProtoBuf;
 
 namespace ConnetyXD.GameServer.Controllers.Api
 {
@@ -55,8 +55,9 @@ namespace ConnetyXD.GameServer.Controllers.Api
             Log.Information("reqBody: " + reqBody);
 
             Type reqType = ProtocolHandlerFactory.GetRequestPacketTypeByProtocol(protocol);
-            IMessage reqPacket = (IMessage)JsonSerializer.Deserialize(reqBody, reqType, options:SnakeCaseNamingPolicy.SnakeCaseOptions);
+            IExtensible reqPacket = (IExtensible)JsonSerializer.Deserialize(reqBody, reqType, options:SnakeCaseNamingPolicy.SnakeCaseOptions);
 
+            // received req
             var respPacket = protocolHandlerFactory.Invoke(protocol, reqPacket);
             
             if (respPacket is null)
@@ -65,13 +66,6 @@ namespace ConnetyXD.GameServer.Controllers.Api
                 
                 return Results.Empty;
             }
-
-            // received req
-            protocolHandlerFactory.Invoke(protocol, reqPacket);
-
-            //string respPacketStr = JsonSerializer.Serialize(respPacket, SnakeCaseNamingPolicy.SnakeCaseOptions);
-
-            //Log.Information("respPacket: ", respPacketStr);
 
             return Results.Json(respPacket, SnakeCaseNamingPolicy.SnakeCaseOptions);
             //return Results.Text(respPacketStr, "application/json");

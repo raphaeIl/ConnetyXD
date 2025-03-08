@@ -1,6 +1,6 @@
 ﻿using ConnetyXD.Common.Core;
-using Google.Protobuf;
 using Oz;
+using ProtoBuf;
 using System.Reflection;
 using System.Text.Json;
 
@@ -35,9 +35,9 @@ namespace ConnetyXD.Common.Utils
             return PcapUtils.Instance.Packets.Where(p => p.Protocol == protocol).FirstOrDefault();
         }
 
-        public static OZPacket GetPacketFromPcap<T>() where T : IMessage
+        public static OZPacket GetPacketFromPcap<T>() where T : IExtensible
         {
-            Protocol protocol = (Protocol)Enum.Parse(typeof(Protocol), typeof(T).ToString());
+            Protocol protocol = (Protocol)Enum.Parse(typeof(Protocol), typeof(T).Name);
 
             return GetPacketFromPcap(protocol);
         }
@@ -87,7 +87,7 @@ namespace ConnetyXD.Common.Utils
 
                 //Console.WriteLine(payloadStr);
 
-                IMessage reqPacket = (IMessage)JsonSerializer.Deserialize(payloadStr, payloadType, options: SnakeCaseNamingPolicy.SnakeCaseOptions);
+                IExtensible reqPacket = (IExtensible)JsonSerializer.Deserialize(payloadStr, payloadType, options: SnakeCaseNamingPolicy.SnakeCaseOptions);
 
                 if (reqPacket is null)
                 {
@@ -118,7 +118,7 @@ namespace ConnetyXD.Common.Utils
 
     public class OZPacket
     {
-        public IMessage Packet { get; set; }
+        public IExtensible Packet { get; set; }
 
         public Protocol Protocol { get; set; }
     }

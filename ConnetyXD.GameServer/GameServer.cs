@@ -1,15 +1,11 @@
 using System.Reflection;
-using System.Text.Json.Serialization;
-using System.Text.Json;
-using ConnetyXD.Common.Core;
-using Google.Protobuf;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Newtonsoft.Json;
 using Oz;
 using Serilog;
-using System.Text.RegularExpressions;
 using ConnetyXD.GameServer.Controllers.Api.ProtocolHandlers;
 using ConnetyXD.Common.Utils;
+using ConnetyXD.Common.Core;
 
 namespace ConnetyXD.GameServer
 {
@@ -17,27 +13,9 @@ namespace ConnetyXD.GameServer
     {
         public static void Main(string[] args)
         {
-            //var mission_get = new MissionGetAns()
-            //{
-            //    Error = new OZError()
-            //    {
-            //        Message = "success"
-            //    },
-            //    MissionGroups =
-            //    {
-            //        new OZMissionGroup()
-            //        {
-            //            Id = "GuideMissionGroup_New_User",
-            //            Missions =
-            //            {
-            //                { "GuideMission_New_User_01", new OZMission() { ProgressId = "GuideMission_New_User_01", ProgressCount = 1 } },
-            //        }
-            //        }
-            //    }
-            //};
+            var packet = (AccessAns)PcapUtils.GetPacketFromPcap(Protocol.AccessAns).Packet;
 
-            var packet = PcapUtils.GetPacketFromPcap(Protocol.AccessAns);
-            Log.Information(JsonConvert.SerializeObject(packet, Formatting.Indented));
+            Console.WriteLine(System.Text.Json.JsonSerializer.Serialize(packet, SnakeCaseNamingPolicy.SnakeCaseOptions));
 
             Log.Information("Starting GameServer...");
             try

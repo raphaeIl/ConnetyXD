@@ -1,6 +1,6 @@
 ﻿using ConnetyXD.Common.Core;
-using Google.Protobuf;
 using Oz;
+using ProtoBuf;
 using Serilog;
 using System.Reflection;
 
@@ -19,7 +19,7 @@ namespace ConnetyXD.GameServer.Controllers.Api.ProtocolHandlers
 
     public interface IProtocolHandlerFactory
     {
-        public object? Invoke(Protocol protocol, IMessage? req);
+        public object? Invoke(Protocol protocol, IExtensible? req);
         public MethodInfo? GetProtocolHandler(Protocol protocol);
         public void RegisterInstance(Type t, object? inst);
     }
@@ -51,7 +51,7 @@ namespace ConnetyXD.GameServer.Controllers.Api.ProtocolHandlers
             }
         }
 
-        public object? Invoke(Protocol msgId, IMessage? req)
+        public object? Invoke(Protocol msgId, IExtensible? req)
         {
             var handler = GetProtocolHandler(msgId);
             if (handler is null)
